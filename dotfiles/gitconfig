@@ -62,7 +62,7 @@
 [branch]
     autosetuprebase = always
 [gitreview]
-    username = novas0x2a
+    username = solarfly73
 [diff]
     algorithm = histogram
 [gc]

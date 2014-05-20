@@ -1,0 +1,19 @@
+sudo apt-get update
+sudo apt-get install -y git
+sudo apt-get install -y git-flow
+copy .gitconfig from github
+sudo update-alternatives --config editor  # set it to vim.basic
+mkdir ~/src
+#git clone linuxenv
+sudo apt-get install npm
+sudo ln -s /usr/bin/nodejs /usr/local/bin/node
+sudo npm install -g mocha
+sudo apt-get install openjdk-7-jdk
+sudo apt-get install maven
+mkdir ~/contrib
+#Install Jenkins: 
+sudo apt-get install daemon
+cd contrib && wget http://pkg.jenkins-ci.org/debian/binary/jenkins_1.562_all.deb
+dpkg -i jenkins_1.xxx_all.deb
+# Hbase
+wget http://apache.mirror.quintex.com/hbase/hbase-0.94.18/hbase-0.94.18.tar.gz
