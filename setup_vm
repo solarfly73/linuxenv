@@ -30,3 +30,9 @@ wget http://apache.mirror.quintex.com/hbase/hbase-0.94.18/hbase-0.94.18.tar.gz
 # other tools
 sudo apt-get install ipmitool
 sudo apt-get mdpress  # Markdown slideshow thing for js
+
+# HipChat (only useful on X11 enabled installation)
+sudo echo "deb http://downloads.hipchat.com/linux/apt stable main" > /etc/apt/sources.list.d/atlassian-hipchat.list
+sudo /etc/apt/sources.list.d/atlassian-hipchat.list
+apt-get update
+apt-get install hipchat
