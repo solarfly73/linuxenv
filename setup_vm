@@ -16,6 +16,7 @@ sudo ./install.sh
 sudo apt-get install npm
 sudo ln -s /usr/bin/nodejs /usr/local/bin/node
 sudo npm install -g mocha
+sudo npm install -g istanbul
 sudo apt-get install openjdk-7-jdk
 sudo apt-get install pylint
 sudo apt-get install python-virtualenv
