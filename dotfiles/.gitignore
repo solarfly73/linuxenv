@@ -60,5 +60,6 @@
 
 !/.screenrc
 
+*.pyc
 .svn
 CVS

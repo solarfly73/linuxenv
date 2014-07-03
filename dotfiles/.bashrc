@@ -45,29 +45,10 @@ esac
 # should be on the output of commands, not on the prompt
 #force_color_prompt=yes
 
-if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
-    else
-	color_prompt=
-    fi
-fi
-
-
 . ~/.colors
-. ~/.git_prompt
+. ~/.git_prompt  # Sets PROMPT_COMMAND
 
-# Shorten prompt directory path
-#PROMPT_COMMAND='DIR=`pwd|sed -e "s!$HOME!~!"`; if [ ${#DIR} -gt 22 ]; then CurDir=..${DIR:${#DIR}-18}; else CurDir=$DIR; fi;'
-if [ "$color_prompt" = yes ]; then
-    PS1="${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\[$txtcyn\]\$git_branch\[$txtrst\]\$ "
-else
-    PS1="${debian_chroot:+($debian_chroot)}\u@\h:\[$txtgrn\]\$git_branch\[$txtrst\]\$ "
-fi
-unset color_prompt force_color_prompt
+PS1="${debian_chroot:+($debian_chroot)}\u@\h:\$curpwd\[$txtgrn\]\$git_branch\[$txtrst\]\[$txtred\]\$git_dirty\[$txtrst\]\$ "
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
@@ -77,18 +58,6 @@ xterm*|rxvt*)
 *)
     ;;
 esac
-
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls -F'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
 
 # some more ls aliases
 alias ll='ls -alF'
@@ -120,5 +89,9 @@ if ! shopt -oq posix; then
 fi
 
 # SSH-AGENT
-eval $(ssh-agent -s)
-ssh-add
+#eval $(ssh-agent -s)
+#ssh-add
+
+alias newsshagent='eval $(ssh-agent -s) && ssh-add'
+
+unset command_not_found_handle
