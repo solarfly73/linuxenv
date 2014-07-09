@@ -1,6 +1,13 @@
 sudo apt-get update
 
+# Fixing display under some distros for dell monitor under VMWAre
+cvt -r 2560 1440
+xrandr --newmode "2560x1440_60.00" <mode info from above>
+xrandr --addmode Virtual1 2560x1440_60.00
+xrandr --output Virtual1 2560x1440_60.00   (or lxrandr)
+
 # Git Setup
+ssh-keygen   and upload the public key to github
 sudo apt-get install -y git
 sudo apt-get install -y git-flow
 copy .gitconfig from github
@@ -16,6 +23,7 @@ sudo ./install.sh
 sudo apt-get install npm
 sudo ln -s /usr/bin/nodejs /usr/local/bin/node
 sudo npm install -g mocha
+sudo npm install -g istanbul
 sudo apt-get install openjdk-7-jdk
 sudo apt-get install pylint
 sudo apt-get install python-virtualenv
@@ -49,3 +57,23 @@ git clone git@github.com:NodePrime/pySMART
 pip install netifaces
 cd pySMART && pip install -e .
 
+
+# Notes to install terminology
+cd src/contrib
+git clone http://git.enlightenment.org/core/efl.git
+git clone http://git.enlightenment.org/apps/terminology.git
+sudo apt-get install e17 (the only version of enlightenment avail on ubuntu)
+sudo apt-get build-dep libefl-dev
+sudo apt-get install libfribidi-dev freetype6-dev libjpeg-dev libssl-dev libgstreamer-plugins-base1.0-dev libgstreamer-plugins-dev libsndfile-dev libpulse-dev autopoint
+sudo apt-get install libx11-dev
+apt-get install -y libelementary-dev 
+
+cd efl
+bash autogen.sh  and fix all the fucking dependencies
+sudo make install
+
+cd ../terminology
+bash autogen.sh  same shit as above
+sudo make install
+
+See if the shit runs
