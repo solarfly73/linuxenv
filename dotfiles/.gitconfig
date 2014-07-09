@@ -1,6 +1,6 @@
 [user]
     name = Derek Douville
-    email = derekd73@gmail.com
+    email = derekd@nodeprime.com
 [color]
     diff = auto
     status = auto
@@ -27,6 +27,7 @@
     svn-push-cherry = !"f() { set -x; safe=__safe-$RANDOM; current=$(git current-branch); git svn rebase && git checkout -b $safe $1 && git svn dcommit && git checkout ${current} && git svn rebase && git branch -d $safe; set +x; }; f"
 
     # Some short versions
+    b = branch
     s = status
     ap = add -p
     ri = rebase --interactive
