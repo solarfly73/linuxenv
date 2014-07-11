@@ -42,7 +42,7 @@ PS1='$(if [ $prompt_user -eq 0 ];then echo "'$prompt_root_user'"; else echo "'$p
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
 xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    PS1="\[\e]0;\u@\h: \w\a\]$PS1"
     ;;
 *)
     ;;
