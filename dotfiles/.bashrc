@@ -30,25 +30,14 @@ shopt -s checkwinsize
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-# set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
-fi
-
-# set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
-    xterm-color) color_prompt=yes;;
-esac
-
-# uncomment for a colored prompt, if the terminal has the capability; turned
-# off by default to not distract the user: the focus in a terminal window
-# should be on the output of commands, not on the prompt
-#force_color_prompt=yes
-
+# Derek's awesome colored prompt
 . ~/.colors
 . ~/.git_prompt  # Sets PROMPT_COMMAND
 
-PS1="${debian_chroot:+($debian_chroot)}\u@\h:\$curpwd\[$txtgrn\]\$git_branch\[$txtrst\]\[$txtred\]\$git_dirty\[$txtrst\]\$ "
+prompt_root_user="\[$bldred\]"'\u'"\[$txtrst\]"
+prompt_normal_user="\[$txtwht\]"'\u'"\[$txtrst\]"
+
+PS1='$(if [ $prompt_user -eq 0 ];then echo "'$prompt_root_user'"; else echo "'$prompt_normal_user'"; fi)'"@\h:\$curpwd\[$txtgrn\]\$git_branch\[$txtrst\]\[$txtred\]\$git_dirty\[$txtrst\]\$prompt_sign "
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
@@ -58,11 +47,6 @@ xterm*|rxvt*)
 *)
     ;;
 esac
-
-# some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -88,10 +72,5 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# SSH-AGENT
-#eval $(ssh-agent -s)
-#ssh-add
-
-alias newsshagent='eval $(ssh-agent -s) && ssh-add'
-
 unset command_not_found_handle
+

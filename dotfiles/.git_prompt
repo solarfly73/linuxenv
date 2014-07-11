@@ -33,7 +33,18 @@ find_curpwd() {
     fi
 }
 
-PROMPT_COMMAND="find_git_branch; find_git_dirty; find_curpwd"
+find_user() {
+    if id | grep "uid=0" 2>&1 > /dev/null; then
+        prompt_user=0
+        prompt_sign="#"
+    else
+        prompt_user=1
+        prompt_sign="\$"
+    fi
+}
+
+
+PROMPT_COMMAND="find_git_branch; find_git_dirty; find_curpwd; find_user"
 
 # Default Git enabled prompt with dirty state
 # export PS1="\u@\h \w \[$txtcyn\]\$git_branch\[$txtred\]\$git_dirty\[$txtrst\]\$ "
