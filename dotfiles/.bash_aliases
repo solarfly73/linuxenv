@@ -5,3 +5,4 @@ else
     alias ls='ls -F'
 fi
 alias nve=". $HOME/np_env/bin/activate"
+alias ssh="ssh -A"
