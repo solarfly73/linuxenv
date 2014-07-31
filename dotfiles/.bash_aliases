@@ -6,3 +6,6 @@ else
 fi
 alias nve=". $HOME/np_env/bin/activate"
 alias ssh="ssh -A"
+
+function npclone() { git clone git@github.com:NodePrime/$@ ;}
+function clone() { git clone git@github.com:$@ ;}

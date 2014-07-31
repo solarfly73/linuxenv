@@ -7,3 +7,5 @@ set syntax=on
 set background=dark
 filetype indent on
 colorscheme desert
+autocmd BufRead,BufNewFile  *.mk,Makefile noexpandtab
+
