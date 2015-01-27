@@ -5,6 +5,7 @@ else
     alias ls='ls -F'
 fi
 alias nve=". $HOME/np_env/bin/activate"
+alias nve3=". $HOME/np_env3/bin/activate"
 alias ssh="ssh -A"
 
 function npclone() { git clone git@github.com:NodePrime/$@ ;}
