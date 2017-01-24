@@ -48,7 +48,7 @@ bindsym $mod+Shift+b exec /usr/bin/google-chrome
 # start hipchat
 bindsym $mod+Shift+n exec /usr/local/bin/hipchat4
 # start IRC
-bindsym $mod+Shift+m exec /usr/bin/quassel
+bindsym $mod+Shift+m exec /usr/bin/hexchat
 # start wifi client
 bindsym $mod+Shift+comma exec /usr/local/bin/terminology -e /usr/bin/wicd-curses
 
