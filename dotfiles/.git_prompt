@@ -1,27 +1,25 @@
+. $HOME/.colors
+
 find_git_branch() {
   # Based on: http://stackoverflow.com/a/13003854/170413
   local branch
+  git_branch=""
   if branch=$(git rev-parse --abbrev-ref HEAD 2> /dev/null); then
     if [[ "$branch" == "HEAD" ]]; then
-      branch='detached*'
+      branch=$(git rev-parse --short HEAD)
     fi
-    # using git hubflow, shorten "feature/" to "f/"
-    branch=$(echo $branch | sed -e 's,feature/,f/,')
-    git_branch="($branch)"
-  else
-    git_branch=""
+    # using git hubflow, shorten "feature/" to "f/" and truncate if hugely long
+    branch=$(echo $branch | sed -e 's,features\?/,f/,')
+    if [ ${#branch} -ge 20 ]; then
+        git_branch="($(echo $branch | cut -b 1-20)..)"
+    else
+        git_branch="($branch)"
+    fi
   fi
 }
 
-. $HOME/.colors
-
 find_git_dirty() {
-  local status=$(git status --porcelain 2> /dev/null)
-  if [[ "$status" != "" ]]; then
-    git_dirty='*'
-  else
-    git_dirty=""
-  fi
+    git_dirty=$(git status -s --porcelain | awk 'BEGIN{untracked=0; changed=0; ustr=""; cstr=""}{if (/\?\?/) {++untracked} else {++changed}; if (changed > 0) {cstr=changed}; if (untracked > 0) {ustr="?"};} END{if (untracked + changed > 0) {printf ("[%s%s]*", cstr, ustr)}}')
 }
 
 find_curpwd() {
