@@ -19,7 +19,9 @@ find_git_branch() {
 }
 
 find_git_dirty() {
-    git_dirty=$(git status -s --porcelain | awk 'BEGIN{untracked=0; changed=0; ustr=""; cstr=""}{if (/\?\?/) {++untracked} else {++changed}; if (changed > 0) {cstr=changed}; if (untracked > 0) {ustr="?"};} END{if (untracked + changed > 0) {printf ("[%s%s]*", cstr, ustr)}}')
+    if [ -d .git ]; then
+        git_dirty=$(git status -s --porcelain | awk 'BEGIN{untracked=0; changed=0; ustr=""; cstr=""}{if (/\?\?/) {++untracked} else {++changed}; if (changed > 0) {cstr=sprintf("[%d]", changed);}; if (untracked > 0) {ustr="*"};} END{if (untracked + changed > 0) {printf ("%s%s", cstr, ustr)}}')
+    fi
 }
 
 find_curpwd() {

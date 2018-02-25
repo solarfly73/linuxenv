@@ -74,3 +74,31 @@ fi
 
 unset command_not_found_handle
 
+# Make EDITOR sensible
+if [ -x /etc/alternatives/vim ]; then
+    export EDITOR=/etc/alternatives/vim
+elif [ -x /etc/alternatives/vi ]; then
+    export EDITOR=/etc/alternatives/vi
+elif [ -x /usr/bin/vim ]; then
+    export EDITOR=/usr/bin/vim
+else
+    export EDITOR=/usr/bin/vi
+fi
+
+# enable some variables for i3wm
+export TERMINAL=`which terminology`   # if this fails, TERMINAL will be empty
+
+[ -s "$HOME/.gvm/scripts/gvm" ] && . "$HOME/.gvm/scripts/gvm"
+gvm use go1.8.3
+export GOPATH=/home/derek/go
+echo "Activating Logitech GOPATH in krypto-api/go"
+kactivate # see .bash_aliases
+if [ -e ~/.krypto_testenv ]; then
+    . ~/.krypto_testenv
+fi
+
+# nvm environment setup
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+export PATH=$GOPATH/bin:$PATH
